@@ -3,19 +3,19 @@ create phone number and email extractor using regex
 todo:
 *1. search all phone numbers
 *2. search all email addresses
-3. return error if no numbers and emails
-4. sort the numbers and emails in a not ugly way
-5. copy them to the clipboard
+*3. return error if no numbers and emails
+*4. sort the numbers and emails in a not ugly way
+*5. copy them to the clipboard
 """
 
-import re
+import re, pyperclip
 
 
-searchText1 = input('Input the text to search phone numbers and email addresses in. Leave it blank to search default text.\n')
+searchText = input('Input the text to search phone numbers and email addresses in. Leave it blank to search default text.\n')
 
 
-if searchText1 == '':
-            searchText1 = '''Contact Us
+if searchText == '':
+            searchText = '''Contact Us
             Reach Us by Email - email is the best way to reach us
 
                 Help with your order: support@nostarch.com
@@ -72,9 +72,9 @@ emailRegex = re.compile(r'''(
 numbers = ''
 emails = ''
 match_n = []
-for group in phoneNumberRegex.findall(searchText1):
+for group in phoneNumberRegex.findall(searchText):
     match_n.append(group[0])
-match_e = emailRegex.findall(searchText1)
+match_e = emailRegex.findall(searchText)
 
 numbers = '\n'.join(match_n)
 emails = '\n'.join(match_e)
@@ -83,7 +83,14 @@ if not numbers and not emails:
     print ('The text does not contain any phone numbers or email addresses.')
 elif not numbers and emails:
     print ('The text does not contain any phone numbers.\n\nThe emails in the text are:\n'+emails)
+    print('\n\nThe emails have been copied to your clipboard.')
+    pyperclip.copy(emails)
 elif not emails and numbers:
     print ('The text does not contain any email addresses.\n\nThe phone numbers in the text are:\n'+numbers)
+    print('\n\nThe phone numbers have been copied to your clipboard.')
+    pyperclip.copy(numbers)
+
 else:
     print ('The phone numbers in the text are:\n'+numbers+'\n\nAnd the emails in the text are:\n'+emails)
+    print('\n\nThe phone numbers and emails have been copied to your clipboard.')
+    pyperclip.copy(numbers+'\n\n'+emails)

@@ -1,5 +1,12 @@
-import re
+from multiprocessing.pool import ApplyResult
+import re, pyperclip
 
 phoneNumRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
 mo = phoneNumRegex.search('My number is 415-555-4242.')
 print('Phone number found: ' + mo.group())
+
+
+var1='apple'
+var2='banana'
+pyperclip.copy(var1+'\n\n'+var2)
+pyperclip.paste(var1+'\n\n'+var2)
