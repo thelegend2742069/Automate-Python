@@ -16,19 +16,28 @@ numCheck = re.compile('[0-9]+')
 def main(given):
     match = []
     if len(given)<8:
-        print('\nPassword is weak.')
+        print('\nPassword is weak.\n')
     else:
         match.append(smallCheck.findall(given))
         match.append(capitalCheck.findall(given))
         match.append(numCheck.findall(given))
         for i in match:
             if len(i)==0:
-                print('\nPassword is weak.')
+                print('\nPassword is weak.\n')
                 match = []
                 break
         if match != []: print('\nPassword is strong.\n')
-    
+
+
+
 password = input('Enter a password. I will check if it is strong or not.\n')
 
 
 main(password)
+
+while True:
+    password = input('Enter another password to check. Leave blank to exit.\n')
+    if password == '':
+        break
+    else:
+        main(password)
