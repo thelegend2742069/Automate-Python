@@ -26,8 +26,8 @@ def main(given):
                 print('\nPassword is weak.')
                 match = []
                 break
-        if match != []: print('\nPassword is strong.\n'+str(match))
-
+        if match != []: print('\nPassword is strong.\n')
+    
 password = input('Enter a password. I will check if it is strong or not.\n')
 
 
