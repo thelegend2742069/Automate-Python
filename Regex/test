@@ -34,3 +34,10 @@ print(match)
 sentence = input("\n")
 match = checker.findall(sentence)
 print(match)
+
+for i in match:
+    if len(i)==0:
+        print('\nPassword is weak.')
+        match = []
+        break
+    
