@@ -1,4 +1,4 @@
-import re, pyperclip
+import re, pyperclip, os
 
 """
 phoneNumRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
@@ -30,6 +30,7 @@ match = checker.findall('''
                     Carol eats 7 cats.
                     ''')
 
+"""
 print(match)
 sentence = input("\n")
 match = checker.findall(sentence)
@@ -40,4 +41,15 @@ for i in match:
         print('\nPassword is weak.')
         match = []
         break
-    
+"""
+
+
+os.makedirs('TestFiles')
+
+for i in range(1,11):
+    quizFile = open('TestFiles/Test File '+str(i)+'.txt', 'w')
+    quizFile.write('test file number '+str(i))
+    quizFile.close()
+    quizFile = open('TestFiles/Test File '+str(i)+'.txt')
+    print(quizFile.read()+'\n')
+    quizFile.close()
