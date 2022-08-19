@@ -1,4 +1,4 @@
-import re, pyperclip, os
+import re, pyperclip, os, bs4, requests
 
 """
 phoneNumRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
@@ -18,6 +18,9 @@ while name != '':
     name=input('What is your name? Leave blank to exit.')
 print('Goodbye.')
 """
+
+
+"""
 checker = re.compile(r'(Alice|Bob|Carol)\s(eats|pets|throws)\s(apples|cats|baseballs)\.', re.IGNORECASE)
 match = checker.findall('''
                     Alice eats apples.
@@ -29,6 +32,8 @@ match = checker.findall('''
                     ALICE THROWS FOOTBALLS.
                     Carol eats 7 cats.
                     ''')
+
+"""
 
 """
 print(match)
@@ -44,6 +49,7 @@ for i in match:
 """
 
 
+"""
 os.makedirs('TestFiles')
 
 for i in range(1,11):
@@ -52,4 +58,10 @@ for i in range(1,11):
     quizFile.close()
     quizFile = open('TestFiles/Test File '+str(i)+'.txt')
     print(quizFile.read()+'\n')
-    quizFile.close()
+    quizFile.close()    
+"""
+
+res = requests.get("https://xkcd.com")
+#print(res.text)
+current_finder = re.compile(r'/(\d+)/')
+print(current_finder.findall(res.text)[0])
