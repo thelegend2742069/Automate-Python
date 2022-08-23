@@ -2,16 +2,19 @@ import requests, os, bs4, re, datetime
 from PIL import Image
 
 def main(var):
-    if var == 'today':
-        var = re.sub('-','', str(datetime.date.today())[2:])
+
     res = requests.get('https://apod.nasa.gov/apod/ap%s.html' %(var))
     res.raise_for_status
 
     soup = bs4.BeautifulSoup(res.text, 'html.parser')
     image = soup.select('img')
 
+    try:
+        imgURL = 'https://apod.nasa.gov/apod/'+image[0].get('src')
+    except IndexError:
+        print('This day did not have an astropic.\nPlease check https://apod.nasa.gov/apod/ap%s.html' %(var))
+        return
     
-    imgURL = 'https://apod.nasa.gov/apod/'+image[0].get('src')
     imgres = requests.get(imgURL)
     imgres.raise_for_status
     
@@ -22,8 +25,8 @@ def main(var):
     imgFile.close()
     
     
-    imgopn = Image.open('Astronomy Pic of the Day/AstroPic %s.jpg' %(var))
-    imgopn.show()
+    imgopen = Image.open('Astronomy Pic of the Day/AstroPic %s.jpg' %(var))
+    imgopen.show()
 
 
     explan = re.sub(r'(\s+|\n)', ' ', soup.select('p')[2].text).strip()
@@ -38,6 +41,8 @@ if date == 'today':
 elif date == 'yesterday':
     date = re.sub('-','', str(datetime.date.today())[2:])
     date = str(int(date)-1)
-
+elif len(date) != 6:
+    print('This is not a valid date.')
+    exit()
 main(date)
 
