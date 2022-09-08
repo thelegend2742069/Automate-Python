@@ -62,9 +62,9 @@ phoneNumberRegex = re.compile(r'''(
 
 
 emailRegex = re.compile(r'''(
-            [a-zA-Z0-9.+_]+
-            @
-            [a-zA-Z0-9.]+
+            [a-zA-Z0-9.+_]+           #username
+            @                         
+            [a-zA-Z0-9.]+             #domain
             \.
             [a-zA-Z]{2,4}
                             )''', re.VERBOSE)
@@ -73,8 +73,8 @@ numbers = ''
 emails = ''
 match_n = []
 for group in phoneNumberRegex.findall(searchText):
-    match_n.append(group[0])
-match_e = emailRegex.findall(searchText)
+    match_n.append(group[0])                 #add matching numbers to number list
+match_e = emailRegex.findall(searchText)     #add matching email addresses to email list
 
 numbers = '\n'.join(match_n)
 emails = '\n'.join(match_e)

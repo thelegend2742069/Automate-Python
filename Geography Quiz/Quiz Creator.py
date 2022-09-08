@@ -44,7 +44,7 @@ capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
 'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 'West Virginia': 
 'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
 
-
+#create list of states and empty list for wrong options
 states = list(capitals.keys())
 wrongOptions = []
 
